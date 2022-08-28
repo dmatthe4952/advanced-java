@@ -1,7 +1,7 @@
-.classpath
-.project
-.settings/
-bin
+# Eclipse files
+*/.classpath
+*/.project
+*/.settings
 
 # Compiled class file
 *.class
