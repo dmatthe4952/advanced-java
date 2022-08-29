@@ -5,6 +5,7 @@
   <groupId>maven</groupId>
   <artifactId>guava-example-parent</artifactId>
   <version>1.0</version>
+  <packaging>pom</packaging>
   
   <name>guava-example</name>
   <url>http://maven.apache.org</url>
