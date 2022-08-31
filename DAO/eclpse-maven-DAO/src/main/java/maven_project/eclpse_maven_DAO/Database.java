@@ -17,6 +17,10 @@ public class Database {
 
 	}
 	
+	public Connection getConnection() {
+		return conn;
+	}
+	
 	public void connect() throws ClassNotFoundException, SQLException {
 //		Class.forName("com.mysql.jdbc.Driver");
 			
