@@ -6,22 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAOimpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
-	public UserDAOimpl() {
+	public UserDAOImpl() {
 
 	}
 
 	@Override
 	public void save(User u) {
-		System.out.println("Saving " + u);
 		var conn = Database.instance().getConnection();
 		var sql = "insert into user (name) values(?)";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, u.getName());
 			stmt.executeUpdate();
-			conn.commit();
 			stmt.close();
 		}catch (SQLException e){
 			throw new DAOException(e);
@@ -58,7 +56,6 @@ public class UserDAOimpl implements UserDAO {
 			stmt.setString(1, t.getName());
 			stmt.setInt(2, t.getId());
 			stmt.executeUpdate();
-			conn.commit();
 		}catch (SQLException e){
 			throw new DAOException(e);
 		}
@@ -72,7 +69,6 @@ public class UserDAOimpl implements UserDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, t.getId());
 			stmt.executeUpdate();
-			conn.commit();
 		}catch (SQLException e){
 			throw new DAOException(e);
 		}
@@ -82,7 +78,7 @@ public class UserDAOimpl implements UserDAO {
 	@Override
 	public List<User> getAll() {
 		var conn = Database.instance().getConnection();
-		var sql = "select id, name from user";
+		var sql = "select id, name from user order by id";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			List<User> users = new ArrayList<>();

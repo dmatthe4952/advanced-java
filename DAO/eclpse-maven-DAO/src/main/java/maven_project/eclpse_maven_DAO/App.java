@@ -22,7 +22,7 @@ public class App {
 		System.out.println("Connected.");
 		
 		var user = new User("Frank");
-		var dao = new UserDAOimpl();
+		var dao = new UserDAOImpl();
 		dao.save(user);
 		
 		List<User> users = dao.getAll();
