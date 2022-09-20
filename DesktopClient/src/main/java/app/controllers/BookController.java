@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import app.gui.CreateBookPanel;
 import app.gui.MainFrame;
 import app.gui.ViewBooksPanel;
@@ -19,9 +21,10 @@ public class BookController {
 	private MainFrame mainFrame;
 	private final List<Book> bookList = new ArrayList<>();
 	
-	public BookController() throws IOException {
+	public BookController() {
 		bookService = new BookService();
 		loadBooklist();
+		System.out.println("Book list just loaded.");
 		createPanel = new CreateBookPanel();
 		viewPanel = new ViewBooksPanel(bookList);
 		createPanel.setFormListener((title, author) -> {
@@ -29,14 +32,13 @@ public class BookController {
 				bookService.sendBook(new Book(title,author));
 				refresh();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(mainFrame, "2.Error getting data", "Could not retrieve data.", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		mainFrame = new MainFrame(createPanel, viewPanel);
 		mainFrame.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
-				refresh();
+				loadBooklist();
 			}
 		});
 	}
@@ -46,8 +48,7 @@ public class BookController {
 		try {
 			bookList.addAll(bookService.getAll());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(mainFrame, "1.Error getting data", "Could not retrieve data.", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}

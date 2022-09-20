@@ -17,7 +17,10 @@ public class ViewBooksPanel extends JPanel {
 	private BookTableModel btm;
 	private JTable table;
 	
-	public ViewBooksPanel(List<Book> bookList){		
+	public ViewBooksPanel(List<Book> bookList){	
+		if (!(bookList.size() > 0)) {
+			return;
+		}
 		btm = new BookTableModel(bookList);
 		setLayout(new BorderLayout());
 		table = new JTable(btm);
